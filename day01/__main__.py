@@ -3,5 +3,7 @@ from . import main
 
 
 args = maintools.parse_args()
+path = maintools.get_datapath(__file__, args.file)
 func = getattr(main, f'part{args.part}')
-func(filepath=maintools.get_datapath(__file__, args.file))
+result = func(filepath=path)
+print(result)
