@@ -32,3 +32,23 @@ def part1(filepath):
     treemap = TreeMap(lines)
     return treemap.try_slope(xstep=3, ystep=1)
 
+
+def part2(filepath):
+    SLOPES = [
+        dict(xstep=1, ystep=1),
+        dict(xstep=3, ystep=1),
+        dict(xstep=5, ystep=1),
+        dict(xstep=7, ystep=1),
+        dict(xstep=1, ystep=2),
+    ]
+    lines = file.get_lines(filepath)
+    treemap = TreeMap(lines)
+    values = [
+        treemap.try_slope(**slope)
+        for slope in SLOPES
+    ]
+    result = 1
+    for val in values:
+        result *= val
+    return result
+
