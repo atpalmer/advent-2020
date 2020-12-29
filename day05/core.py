@@ -27,13 +27,27 @@ def get_row(line):
     return result
 
 
+def get_seat_ids(lines):
+    for line in lines:
+        row = get_row(line)
+        col = get_col(line)
+        seat_id = row * 8 + col
+        yield seat_id
+
+
 def part1(filepath):
-    def get_seat_ids(lines):
-        for line in lines:
-            row = get_row(line)
-            col = get_col(line)
-            seat_id = row * 8 + col
-            yield seat_id
     lines = file.get_lines(filepath)
     return max(get_seat_ids(lines))
+
+
+def part2(filepath):
+    lines = file.get_lines(filepath)
+    missing = list()
+    last = None
+    for id in sorted(get_seat_ids(lines)):
+        if last and id != last + 1:
+            missing.append(last + 1)
+        last = id
+    assert len(missing) == 1
+    return next(iter(missing))
 
