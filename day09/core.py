@@ -29,3 +29,19 @@ def part1(filepath):
         buff.append(val)
     assert False, 'Unreachable'
 
+
+def part2(filepath):
+    TARGET = 26796446
+    vals = [int(line) for line in file.get_lines(filepath)]
+    for i in range(len(vals)):
+        tmp = []
+        tmp.append(vals[i])
+        for j in range(i + 1, len(vals)):
+            tmp.append(vals[j])
+            total = sum(tmp)
+            if total == TARGET:
+                return max(tmp) + min(tmp)
+            if total > TARGET:
+                break
+    assert False
+
